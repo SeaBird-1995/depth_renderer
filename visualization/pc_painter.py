@@ -27,6 +27,7 @@ class PC_from_DEP(object):
         self._with_normal = with_normal
 
         self._depth_maps = np.float32(dist_to_dep(dist_maps, [self._cam_K]*len(view_ids)))
+        print(self._depth_maps.shape, self.depth_maps.min(), self.depth_maps.max())
         self._point_clouds = self.get_point_cloud(self.depth_maps, [self._cam_K]*len(view_ids), self._cam_RTs, self._rgb_imgs)
         if with_normal:
             self._point_clouds['normal'] = self.get_point_normal(self._point_clouds)
@@ -59,7 +60,7 @@ class PC_from_DEP(object):
     def get_point_normal(point_clouds):
         pc_counts = [pc.shape[0] for pc in point_clouds['pc']]
         pc_all = np.vstack(point_clouds['pc'])
-        normal_all = pcu.estimate_point_cloud_normals(pc_all, k=16)
+        _, normal_all = pcu.estimate_point_cloud_normals_knn(pc_all, 16)
 
         view_id = 0
 
@@ -117,6 +118,7 @@ class PC_from_DEP(object):
             y = (v - cam_K[1][2]) * z / cam_K[1][1]
 
             point_cam = np.vstack([x, y, z]).T
+            print(cam_RT[:, -1].shape, cam_RT[:,:-1].shape, point_cam.shape, z.shape)
 
             point_canonical = (point_cam - cam_RT[:, -1]).dot(cam_RT[:,:-1])
             cam_pos = - cam_RT[:, -1].dot(cam_RT[:,:-1])

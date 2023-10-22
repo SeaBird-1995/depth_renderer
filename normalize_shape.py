@@ -57,7 +57,10 @@ def normalize(obj_path):
     :param obj_path: ShapeNet object path
     :return:
     '''
-    cat, obj_file = obj_path.split('/')[3:5]
+    # cat, obj_file = obj_path.split('/')[3:5]
+
+    obj_path = obj_path.replace(shapenet_path, "")
+    cat, obj_file = obj_path.split('/')[0:2]
 
     input_cat_dir = append_dir(os.path.join(shapenet_path, cat), obj_file, 'i')
     output_cat_dir = append_dir(os.path.join(shapenet_normalized_path, cat), obj_file, 'o')

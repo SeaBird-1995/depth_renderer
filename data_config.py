@@ -65,7 +65,7 @@ our_categories = ['chair', 'bed']
 our_categories = [shapenet_categlory_pair[cat] for cat in our_categories]
 
 shapenet_path = './datasets/ShapeNetCore.v2'
-shapenet_normalized_path= './datasets/ShapeNetCore.v2_normalized'
+shapenet_normalized_path= '/data1/zhanghm/Datasets/ShapeNet/depth_renderer/ShapeNetCore.v2_normalized'
 shapenet_rendering_path = './datasets/ShapeNetRenderings'
 camera_setting_path = './datasets/camera_settings'
 model_view_path = './model_view_metadata/result.pkl'

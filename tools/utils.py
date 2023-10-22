@@ -7,7 +7,7 @@ date: Jan, 2020
 
 import os
 import numpy as np
-import point_cloud_utils as pcu
+# import point_cloud_utils as pcu
 from tools.read_and_write import read_obj
 from scipy.ndimage.morphology import grey_erosion
 
